@@ -1,0 +1,22 @@
+*.class
+*.log
+
+# sbt specific
+.cache/
+.history/
+.lib/
+dist/*
+target/
+*/target/**
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+data/Sentiment Analysis Dataset.csv
+.DS_Store
+data/.DS_Store
+.idea/
+manifest.json
+data/*.csv
+data/vendor
+composer.lock

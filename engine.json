@@ -1,0 +1,20 @@
+{
+  "id": "default",
+  "description": "Default settings",
+  "engineFactory": "com.coviam.wikiClassifier.engine.wikiClassifierEngine",
+  "datasource": {
+    "params" : {
+      "appName" : "test_wiki",
+      "evalK" : 3
+    }
+  },
+  "algorithms": [
+    {
+      "name": "Naivebayes",
+      "params": {
+        "ngram":2,
+        "lambda" : 1
+      }
+    }
+  ]
+}
