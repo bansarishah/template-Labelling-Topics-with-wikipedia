@@ -189,7 +189,7 @@ $ pio deploy --port 8088
 ### Execute Query
 Run below request for processing query on serving layer, it will return category or wikipedia page name which it belongs.
 ```
-curl -k -H "Content-Type: application/json" -d '{"topics": [["apple","iphone","google","smartphone"]]}' https://localhost:8000/queries.json
+curl -k -H "Content-Type: application/json" -d '{"topics": [["apple","iphone","safari","smartphone"]]}' https://localhost:8000/queries.json
 ```
 
 # Relative Issues
