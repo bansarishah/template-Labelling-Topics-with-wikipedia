@@ -1,8 +1,8 @@
-# Labelling LDA topics with wikipedia
+# Labelling topics with wikipedia
 
 # OverView
 
-After extracting topics using LDA Topic Modeling approach, next step is to label this topics. In this template labelling of topics is carried out with wikipedia as knowledge base or reference.
+After extracting topics (eg. using LDA Topic Modeling approach), next step is to label this topics. In this template labelling of topics is carried out with wikipedia as knowledge base or reference.
 This ML Engine has been implemented using Spark - MlLib - 1.5.1, predictionIO 0.9.7-SNAPSHOT and scala 2.10.6.
 
 Labelling topics can be solved as classification problem, where trainig data set is labelled data of wikipedia pages containing page title(label) and page content. Preprocessing and feature extraction from wikipedia page content is carried out in data preprator part of DASE model which return Labelled points that are trained in Algorithm part of DASE model with Naive Bayes classifier. Classification algorithm can be customizable.
