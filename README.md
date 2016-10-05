@@ -2,10 +2,10 @@
 
 # OverView
 
-After extracting topics using LDA Topic Modeling approach, problem is to how to label this topics. In this template labelling of topics is carried out with taking wikipedia as knowledge base or reference.
+After extracting topics using LDA Topic Modeling approach, next step is to label this topics. In this template labelling of topics is carried out with wikipedia as knowledge base or reference.
 This ML Engine has been implemented using Spark - MlLib - 1.5.1, predictionIO 0.9.7-SNAPSHOT and scala 2.10.6.
 
-Which can be termed as classification problem, where trainig data set is labelled data of wikipedia pages containg pagetitle as label and page content. Feature extraction and creating Labelled point is carried out in data preparator part of DASE Engine which is input to Naive bayes classifier in Algorithm part.
+Labelling topics can be solved as classification problem, where trainig data set is labelled data of wikipedia pages containg pagetitle as label and page content. Preprocessing and feature extraction from wikipedia page content is carried out in data preprator part of DASE model which return Labelled points that are trained in Algorithm part of DASE model with Naive Bayes classifier. Classification algorithm can be customizable.
 
 
 ## Usage
@@ -23,13 +23,13 @@ By default, the template requires the following events to be collected (/data/im
 ### Output Predicted Result
 - it returns category or pagetitle to which topical words belongs.
 ```
-{"Sentiment":1.0,"Score":0.92}
+{"Category" : "Apple Inc."}
 ```
 
 ### Dataset
-Collect latest wikipedia page names from [Wikipedia latest pages title] (https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-all-titles-in-ns0.gz)
+Collect latest wikipedia page names from [Wikipedia latest pages titles] (https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-all-titles-in-ns0.gz)
 
-Run get_wikipages.py code to get wikipedia page content and make corpus that contains page title as label and page content.
+Run data/get_wikipages.py code to get wikipedia page content and make corpus that contains page title as label and page content.
 ```
 import wikipedia
 ...
@@ -92,17 +92,17 @@ You should find the following in the console output:
 ...
 [INFO] [App$] Initialized Event Store for this app ID: 1.
 [INFO] [App$] Created new app:
-[INFO] [App$]       Name: testWiki
+[INFO] [App$]       Name: testApp
 [INFO] [App$]         ID: 1
 [INFO] [App$] Access Key: Oc6X6nxSR7xhuX4S8-0InJUF90T-KBicGbXnWSP3yECVac52GpkPW2OJL0L5DU3x
 ```
-Take note of the Access Key and App ID. You will need the Access Key to refer to "testWiki" when you collect data.
+Take note of the Access Key and App ID. You will need the Access Key to refer to "testApp" when you collect data.
 $ pio app list will return a list of names and IDs of apps created in the Event Server.
 
 ```
 $ pio app list
 [INFO] [App$]                 Name |   ID |                                                       Access Key | Allowed Event(s)
-[INFO] [App$]               testWiki |    1 | Oc6X6nxSR7xhuX4S8-0InJUF90T-KBicGbXnWSP3yECVac52GpkPW2OJL0L5DU3x | (all)
+[INFO] [App$]               testApp |    1 | Oc6X6nxSR7xhuX4S8-0InJUF90T-KBicGbXnWSP3yECVac52GpkPW2OJL0L5DU3x | (all)
 [INFO] [App$]               MyApp |    2 | io5lz6Eg4m3Xe4JZTBFE13GMAf1dhFl6ZteuJfrO84XpdOz9wRCrDU44EUaYuXq5 | (all)
 [INFO] [App$] Finished listing 2 app(s).
 ```
@@ -111,7 +111,7 @@ To use template with above created application, modify appName in engine.json
 ```
 "datasource": {
     "params" : {
-      "appName" : "testWiki"
+      "appName" : "testApp"
     }
   }
 ```
@@ -127,7 +127,7 @@ Replace the value of access_key parameter by your applications's Access Key and 
 
 ```python
 $ pip install predictionio
-$ cd BagOfWords_SentimentAnalysis_Template
+$ cd template-Labelling-LDA-Topics-with-wikipedia
 $ python data/import_eventserver.py --access_key Oc6X6nxSR7xhuX4S8-0InJUF90T-KBicGbXnWSP3yECVac52GpkPW2OJL0L5DU3x --file data/sample_wiki_pages_data.csv
 ```
 You should see the following output:
@@ -143,7 +143,7 @@ Now you can build, train, and deploy the engine. First, make sure you are under 
 
 ### Build
 
-Start with building your Sentimant Analysis engine.
+Start with building your LDA topic labelling engine.
 ```
 $ pio build
 ```
@@ -185,7 +185,7 @@ You can specify port where to deploy
 $ pio deploy --port 8088
 ```
 ### Execute Query
-Run below request for processing query on serving layer, it will return sentiment and its probabilistic score. 
+Run below request for processing query on serving layer, it will return category or wikipedia page name which it belongs.
 ```
 curl -k -H "Content-Type: application/json" -d '{"topics": [["apple","iphone","google","smartphone"]]}' https://localhost:8000/queries.json
 ```
