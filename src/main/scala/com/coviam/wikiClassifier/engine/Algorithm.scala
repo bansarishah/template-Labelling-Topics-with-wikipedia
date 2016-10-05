@@ -12,9 +12,6 @@ import org.apache.spark.sql.{Column, DataFrame, Row, SQLContext}
 import org.apache.spark.sql.functions.lit
 import org.apache.spark.SparkConf
 
-/**
-  * Created by bansarishah on 8/20/16.
-  */
 class Algorithm(val ap:AlgorithmParams) extends P2LAlgorithm[PreparedData, Model, Query, PredictedResult]{
 
   override def train(sc: SparkContext, pd: PreparedData): Model = {
@@ -28,14 +25,11 @@ class Algorithm(val ap:AlgorithmParams) extends P2LAlgorithm[PreparedData, Model
 
   override def predict(model: Model, query: Query): PredictedResult = {
 
-    //val testQry: Seq[Array[String]] = Seq((Array("sport","cricket")))
     val sqlContext = SQLContext.getOrCreate(model.sc)
     val qryInd = query.topics.zipWithIndex
     val df = sqlContext.createDataFrame(qryInd).toDF("words","id")
-    df.show()
     var htf = new HashingTF().setInputCol("words").setOutputCol("feature")
     val hm = htf.transform(df)
-    hm.show(false)
     val featureSet = hm.map(x => x.getAs[Vector]("feature"))
     val categories = model.categories.map(_.swap)
     val prediction = model.nbModel.predict(featureSet).first()
@@ -57,6 +51,7 @@ case class Model( nbModel: NaiveBayesModel,
 
 object Model extends IPersistentModelLoader[AlgorithmParams, Model]{
   def apply(id: String, params: AlgorithmParams, sc: Option[SparkContext]) = {
+   // println(sc.get.objectFile(s"/tmp/${id}/categories"))
     new Model(
       NaiveBayesModel.load(sc.get,s"/tmp/${id}/nbmodel"),
       sc.get.objectFile[Map[String,Int]](s"/tmp/${id}/categories").first,

@@ -11,11 +11,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.DataFrame
 
 
-/**
-  * Created by bansarishah on 8/20/16.
-  */
 class DataSource(val dsp: DataSourceParam) extends PDataSource[TrainingData, EmptyEvaluationInfo, Query, EmptyActualResult]{
-  print("data source called:")
 
   def readEvent(sc:SparkContext) : RDD[WikiPage] = {
     val eventDB = Storage.getPEvents()
@@ -34,7 +30,6 @@ class DataSource(val dsp: DataSourceParam) extends PDataSource[TrainingData, Emp
   }
 
    override def readTraining(sc: SparkContext): TrainingData = {
-    println("DataSource : read training called ")
     new TrainingData(readEvent(sc))
   }
 }
