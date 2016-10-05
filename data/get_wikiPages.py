@@ -17,15 +17,9 @@ def get_wikiPages(filename):
 	df['content'] = content	
 	return df
 
-df = get_wikiPages('test_categories.txt')		
-print(df)
+df = get_wikiPages('list_of_wikipedia_pages_title.txt')		
 
 df.to_csv('test_cat.csv','a',header=True, cols=["title","content"],encoding='utf-8')
-# import codecs
-
-# with codecs.open("testCategory.csv", "a", encoding='utf-8') as file:
-# 	file.writelines(df['title'])
-
 
 
 
