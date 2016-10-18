@@ -3,12 +3,11 @@ assemblySettings
 
 name := "WikiClassifier"
 
-version := "1.0"
+organization := "org.apache.predictionio"
 
-scalaVersion := "2.10.6"
+scalaVersion := "2.10.5"
 
 libraryDependencies ++= Seq(
-  "org.apache.predictionio"    %% "core"          % "0.9.7-SNAPSHOT" % "provided",
-  "org.apache.spark" %% "spark-core"    % "1.5.1" % "provided",
-  "org.apache.spark" %% "spark-mllib"   % "1.5.1" % "provided"
-)
+ "org.apache.predictionio" %% "predictionio-core" % "0.10.0-incubating-rc1" % "provided",
+  "org.apache.spark"        %% "spark-core"               % "1.5.1" % "provided",
+ "org.apache.spark"        %% "spark-mllib"              % "1.5.1" % "provided")
