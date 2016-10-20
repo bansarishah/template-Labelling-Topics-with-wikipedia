@@ -40,9 +40,6 @@ class TrainingData(val contentAndcategory:RDD[WikiPage]) extends Serializable wi
     try {
       val obs = contentAndcategory.takeSample(false, 2)
       println("total observation",obs.length)
-      (0 until obs.length).foreach(
-        k => println("Observation " + (k + 1) + " label: " + obs(k))
-      )
       println()
     } catch {
       case (e: ArrayIndexOutOfBoundsException) => {
