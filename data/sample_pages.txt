@@ -1,0 +1,9 @@
+politics
+sports
+biology
+technology
+science
+programming
+language
+mathematics
+physics

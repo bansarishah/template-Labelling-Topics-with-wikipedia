@@ -18,3 +18,5 @@ data/.DS_Store
 manifest.json
 data/vendor
 composer.lock
+data/creatBatchEvent.py
+data/my_events.json
