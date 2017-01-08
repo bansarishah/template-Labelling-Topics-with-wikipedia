@@ -81,7 +81,7 @@ $ pio status
 To get template clone the below repository by executing the following command in the directory where you want the code to reside:
 
 ```
-git clone https://github.com/peoplehum/template-Labelling-LDA-Topics-with-wikipedia
+git clone https://github.com/peoplehum/template-Labelling-Topics-with-wikipedia
 ```
 
 ## Generate an App ID and Access Key
