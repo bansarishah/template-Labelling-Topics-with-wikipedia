@@ -21,7 +21,7 @@ def get_wikiPages(filename):
 df = get_wikiPages('Pages_Names_Sample.txt')		
 print(df)
 
-df.to_csv('sample_wiki_pages_data.csv',',',header=True, cols=["title","content"],encoding='utf-8')
+df.to_csv('sample_wiki_pages_data.csv',',',header=True, columns=["title","content"],encoding='utf-8')
 
 
 
